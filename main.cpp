@@ -2,6 +2,8 @@
 #include "stress-theory.h"
 #include <iostream>
 
+
+
 int main() {
 
 	// declaration of variables
