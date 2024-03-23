@@ -5,36 +5,19 @@
 #include <math.h>
 
 std::vector<double> stress_theory::takeInput() {
-    // Condition to run loop. If false loop will run, otherwise it will stop.
-    bool runCondition = false; 
-    do { 
-        // Input string.
-        std::string stressString;
+    // Input string.
+    std::string s1, s2, s3;
+    std::vector<std::string> stresses = {s1, s2, s3};
 
-        // Deliminator varibles.
-        std::string delim = ",";
-        std::string token;
-        size_t pos_start = 0, pos_end, delim_len = delim.length();
-
-        std::cout << "Enter principal stresses from I-III seperated with commas: " << std::endl;
-        std::cin >> stressString; 
-
-        // Loop to take the input from user, deliminate and convert it to a double to be input to the stress vector.
-        while ((pos_end = stressString.find(delim, pos_start)) != std::string::npos) {
-            token = stressString.substr (pos_start, pos_end - pos_start);
-            pos_start = pos_end + delim_len;
-            principalStresses.push_back(stod(token));
-        }
-
-        if (principalStresses.size() == 3) {
-            runCondition = true;
-            return this->principalStresses;
-        }
-        else {
-            std::cout << "Incorrect number of stresses added. Try again." << std::endl;
-        }
+    std::cout << "Enter principal stresses from I-III seperated with spaces: " << std::endl;
+    std::cin >> s1 >> s2 >> s3;
+ 
+    // Currently an issue with conversion from string to double
+    for (auto s : stresses) {
+        this->principalStresses.emplace_back(stod(s));
     }
-    while (!runCondition); // Ensures that the code will run until the user inputs information correctly
+
+    return this->principalStresses;
 }
 
 void stress_theory::returnValues() {
