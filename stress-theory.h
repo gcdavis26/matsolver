@@ -1,3 +1,6 @@
+#ifndef THEORY
+#define THEORY
+
 #include <vector>
 
 class stress_theory {
@@ -11,7 +14,7 @@ class stress_theory {
 
 class MSST : public stress_theory {
     public:
-        MSST() {this->principalStresses = this->takeInput();}
+        MSST() {this->principalStresses = takeInput();}
         ~MSST() {}
 
         void calculate();
@@ -24,3 +27,5 @@ class DET : public stress_theory {
 
         void calculate();
 };
+
+#endif
