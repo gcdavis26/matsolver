@@ -2,19 +2,20 @@
 #define THEORY
 
 #include <vector>
+#include <queue>
 
 class stress_theory {
     protected:
         std::vector<double> principalStresses;
         double yieldStress;
 
-        virtual std::vector<double> takeInput();
+        virtual void takeInput();
         virtual void returnValues();
 };
 
 class MSST : public stress_theory {
     public:
-        MSST() {this->principalStresses = takeInput();}
+        MSST() {this->takeInput();}
         ~MSST() {}
 
         void calculate();
@@ -22,7 +23,7 @@ class MSST : public stress_theory {
 
 class DET : public stress_theory {
     public:
-        DET() {this->principalStresses = this->takeInput();}
+        DET() {this->takeInput();}
         ~DET() {}
 
         void calculate();

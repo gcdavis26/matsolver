@@ -3,21 +3,18 @@
 #include <string>
 #include <cstdlib>
 #include <math.h>
+#include <queue>
 
-std::vector<double> stress_theory::takeInput() {
+void stress_theory::takeInput() {
     // Input string.
-    std::string s1, s2, s3;
-    std::vector<std::string> stresses = {s1, s2, s3};
+    double s1, s2, s3;
 
     std::cout << "Enter principal stresses from I-III seperated with spaces: " << std::endl;
     std::cin >> s1 >> s2 >> s3;
  
-    // Currently an issue with conversion from string to double
-    for (auto s : stresses) {
-        this->principalStresses.emplace_back(stod(s));
-    }
-
-    return this->principalStresses;
+    this->principalStresses.emplace_back(s1);
+    this->principalStresses.emplace_back(s2);
+    this->principalStresses.emplace_back(s3);
 }
 
 void stress_theory::returnValues() {
@@ -43,6 +40,7 @@ void MSST::calculate() {
     }
 
     this->yieldStress = yield;
+    this->returnValues();
 }
 
 void DET::calculate() {
@@ -51,4 +49,5 @@ void DET::calculate() {
                        pow(this->principalStresses[2], 2) - (this->principalStresses[0] * this->principalStresses[1]) -
                        (this->principalStresses[0] * this->principalStresses[1]) - 
                        (this->principalStresses[0] * this->principalStresses[1]));
+    this->returnValues();
 }
